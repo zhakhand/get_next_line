@@ -6,7 +6,7 @@
 /*   By: dzhakhan <dzhakhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 11:59:30 by dzhakhan          #+#    #+#             */
-/*   Updated: 2024/07/20 12:33:28 by dzhakhan         ###   ########.fr       */
+/*   Updated: 2024/07/22 11:46:15 by dzhakhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ static char	*do_something(int fd, int *b_r, char *r)
 
 char	*get_next_line(int fd)
 {
-	static char	*r[128];
+	static char	*r[1024];
 	char		*l;
 	int			b_r;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024)
 		return (NULL);
 	while (1)
 	{
@@ -121,3 +121,29 @@ char	*get_next_line(int fd)
 		}
 	}
 }
+
+// int main(void)
+// {
+// 	int fd = open("foo.txt", O_RDWR);
+// 	int sd = open("test.txt", O_RDONLY);
+// 	int f = 1;
+// 	int s = 1;
+// 	//int fd = 42;
+// 	//int fd = 0;
+// 	char	*line;
+// 	while (f && s)
+// 	{
+// 		line = get_next_line(fd);
+// 		if (!line)
+// 			f = 0;	
+// 		printf("%s", line);
+// 		free(line);
+// 		line = get_next_line(sd);
+// 		if (!line) s = 0;
+// 		printf("%s", line);
+// 		free(line);
+// 	}
+// 	printf("%s", line);
+// 	close(fd);
+// 	return 0;
+// }
